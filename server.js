@@ -4,14 +4,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // const morgan = require('morgan');
 
-const { mongoURI } = require('./config/keys');
+const keys = require('./config/keys');
 const itemsRoute = require('./routes/api/itemsRoute');
 
 const app = express();
 
 // Connect to Mongodb
 mongoose
-  .connect(mongoURI, {
+  .connect(keys.mongoURI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
