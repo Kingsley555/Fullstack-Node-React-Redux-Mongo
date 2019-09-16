@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const path = require('path');
 // const morgan = require('morgan');
 
 const keys = require('./config/keys');
 const itemsRoute = require('./routes/api/itemsRoute');
+const usersRoute = require('./routes/api/usersRoute');
+const authRoute = require('./routes/api/auth');
 
 const app = express();
 
@@ -22,13 +23,15 @@ mongoose
   .catch(err => console.log(err));
 
 //BodyParser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //Morgan Middleware to get the routes
 // app.use(morgan('combined'));
 
 // User Routes
 app.use('/api/items', itemsRoute);
+app.use('/api/users', usersRoute);
+app.use('/api/auth', authRoute);
 
 //Serve static assests if in production
 if (process.env.NODE_ENV === 'production') {
